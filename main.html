@@ -7,6 +7,115 @@
 </head>
 
 <body>
+	<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OTP Verification</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #f7f8fa;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    #verification_heading {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #222;
+    }
+
+    #verification_subtext {
+      color: #555;
+      font-size: 16px;
+      margin-bottom: 25px;
+      text-align: center;
+      max-width: 300px;
+    }
+
+    .code-container {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .code {
+      width: 45px;
+      height: 55px;
+      font-size: 24px;
+      text-align: center;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+      transition: all 0.2s ease;
+      background: #fff;
+    }
+
+    .code:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 4px rgba(0, 123, 255, 0.4);
+    }
+
+    @media (max-width: 500px) {
+      .code {
+        width: 40px;
+        height: 50px;
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="verification_heading">Verify Your Account</h1>
+  <p id="verification_subtext">Please enter the 6-digit code sent to your registered mobile number.</p>
+
+  <div class="code-container">
+    <input type="text" class="code" maxlength="1" />
+    <input type="text" class="code" maxlength="1" />
+    <input type="text" class="code" maxlength="1" />
+    <input type="text" class="code" maxlength="1" />
+    <input type="text" class="code" maxlength="1" />
+    <input type="text" class="code" maxlength="1" />
+  </div>
+
+  <script>
+    const codes = document.querySelectorAll('.code');
+
+    codes[0].focus(); // Automatically focus first box
+
+    codes.forEach((input, index) => {
+      input.addEventListener('input', (e) => {
+        const value = e.target.value;
+        if (value.length > 1) {
+          e.target.value = value.charAt(0); // Allow only one character
+        }
+        if (value !== '' && index < codes.length - 1) {
+          codes[index + 1].focus();
+        }
+      });
+
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace') {
+          if (input.value === '' && index > 0) {
+            codes[index - 1].focus();
+            codes[index - 1].value = '';
+          }
+        } else if (e.key >= '0' && e.key <= '9') {
+          input.value = '';
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
 	<!-- the entire body must be written by student -->
     <script type="text/javascript" src="./script.js">
 </script>
